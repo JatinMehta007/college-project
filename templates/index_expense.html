@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Healthcare Expense Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px; /* ⬅ added top padding */
+    }
+    
+    .login {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      margin-top: 40px; /* ⬅ NEW: pushes down from top */
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+      font-size: 26px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 25px;
+      color: #333;
+    }
+
+    @media (max-width: 550px) {
+      .login {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login">
+    <h1>Healthcare Expense Predictor</h1>
+    <form action="{{ url_for('expense_prediction') }}" method="post">
+      <label for="age">Age</label>
+      <input type="text" name="age" placeholder="Enter your age" required>
+
+      <label for="bmi">BMI</label>
+      <input type="text" name="bmi" placeholder="Enter your BMI" required>
+
+      <label for="children">Children</label>
+      <select id="children" name="children" required>
+        <option value="0">Not Applicable</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 & above</option>
+      </select>
+
+      <label for="Sex">Sex</label>
+      <select id="Sex" name="Sex" required>
+        <option value="0">Male</option>
+        <option value="1">Female</option>
+      </select>
+
+      <label for="Smoker">Smoker</label>
+      <select id="Smoker" name="Smoker" required>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+
+      <label for="Region">Region</label>
+      <select id="Region" name="Region" required>
+        <option value="0">Northeast</option>
+        <option value="1">Northwest</option>
+        <option value="2">Southeast</option>
+        <option value="3">Southwest</option>
+      </select>
+
+      <button type="submit">Predict Medical Charges</button>
+    </form>
+
+    <h2>{{ prediction_text }}</h2>
+  </div>
+</body>
+</html>
